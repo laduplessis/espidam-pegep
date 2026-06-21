@@ -150,7 +150,7 @@ To give BEAST2 access to the data, the alignment has to be added to the
 configuration file.
 
 
-> Drag and drop the file \lstinline!EBOV_reference_set_15_cds.fasta! into the open
+> Drag and drop the file `EBOV_reference_set_15_cds.fasta` into the open
 > BEAUti window (it should be open on the **Partitions** tab). When the query
 box pops up asking what to add select **Import Alignment** and select the datatype as **nucleotide**.
 > 
@@ -165,7 +165,7 @@ which should look as shown in Figure~\ref{fig:data1}.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/data1.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/data1.png}
     \caption{Data imported into BEAUti2.}
     \label{fig:data1}
 \end{figure}
@@ -201,9 +201,9 @@ expect them to have a faster substitution rate than 1st and 2nd codon positions.
 
 
 \begin{framed}
-  Select the \lstinline!EBOV_reference_set_15_cds! partition (alignment). It should be 
+  Select the `EBOV_reference_set_15_cds` partition (alignment). It should be 
   the top partition in the **Partitions} tab. Next click on **Split} at the 
-  bottom and select \lstinline!{1,2} + 3! to partition the alignment into two partitions:
+  bottom and select `{1,2} + 3` to partition the alignment into two partitions:
     \begin{itemize}
       - 1st and 2nd codon positions
       - 3rd codon positions
@@ -217,7 +217,7 @@ expect them to have a faster substitution rate than 1st and 2nd codon positions.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/data2.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/data2.png}
     \caption{Partitioning the alignment and linking the clock and tree models.}
     \label{fig:data2}
 \end{figure}
@@ -228,16 +228,16 @@ independent trees and clock models for each partition. There are cases
 role) when we would not link the trees and clock models of different partitions. 
 
 You will see that the **Clock Model} and the **Tree} columns
-in the table both changed to \lstinline!EBOV_reference_set_15_ig!. Now we will
+in the table both changed to `EBOV_reference_set_15_ig`. Now we will
 rename both models such that the following options and generated log
 files are easier to read. The resulting setup should look as shown in
 Figure \ref{fig:data2}.
 
 \begin{framed}
 Click on the first drop-down menu in the **Clock Model} column and
-rename the shared clock model to \lstinline!clock!.
+rename the shared clock model to `clock`.
 
-Likewise, rename the shared tree to \lstinline!tree!.
+Likewise, rename the shared tree to `tree`.
 \end{framed}
 
 
@@ -259,8 +259,8 @@ sequence name, country of origin and collection date separated by vertical bars.
   In order for BEAST2 to use this information we must specify the format of the 
   date string and tell BEAST2 where to find the data. 
   \begin{itemize}
-      - Set **Dates specified} to the \lstinline!as dates with format! option. 
-      - Select \lstinline!yyyy-M-dd! from the dropdown box. 
+      - Set **Dates specified} to the `as dates with format` option. 
+      - Select `yyyy-M-dd` from the dropdown box. 
       - Click the **Auto-configure} button. A window will appear where you can specify how BEAUti can find the collection dates in the sequence headers (Figure~\ref{fig:tipdates}).
       - Select **use everything} and specify **after last \textbar{}} and click **OK}.
   \end{itemize}
@@ -268,14 +268,14 @@ sequence name, country of origin and collection date separated by vertical bars.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=0.5\textwidth, max height=0.9\textheight]{figures/tipdates.png}
+    \includegraphics[max width=0.5\textwidth, max height=0.9\textheight]{source/figures/tipdates.png}
     \caption{Auto-configure tip dates.}
     \label{fig:tipdates}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/parsingerror.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/parsingerror.png}
     \caption{Error parsing these collection dates!}
     \label{fig:parsingerror}
 \end{figure}
@@ -284,7 +284,7 @@ This should throw a date parsing error and the panel should now look as in Figur
 Note that for 3 of the sequences the date only contains the year and month, but no day. Because these dates do not follow the same format as the rest the dates could not be parsed. To correct this we could edit the sequence headers in the Fasta files or we can simply manually edit the dates for these 3 sequences. Since we have no additional information we will use the middle of the month for the day. Alternatively we could enter the first day of the month. As the sequences in the dataset were collected over more than 40 years it is unlikely that a difference of less than 30 days will result in a big change to parameter estimates. Note that it is also possible to estimate the collection dates of sequences in BEAST2, but this cannot be set in BEAUti.
 
 \begin{framed}
-  Double-click on each of the sequences with only a month specified under the \lstinline!Date (raw value)! column and 
+  Double-click on each of the sequences with only a month specified under the `Date (raw value)` column and 
   enter **15} as the day. Note that more errors will be thrown until all three dates are corrected! 
   When you're done the panel should look as in Figure~\ref{fig:datescorrected}.
 \end{framed}
@@ -292,7 +292,7 @@ Note that for 3 of the sequences the date only contains the year and month, but 
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/datescorrected.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/datescorrected.png}
     \caption{Setting the tip dates.}
     \label{fig:datescorrected}
 \end{figure}
@@ -325,7 +325,7 @@ models are unlinked. However, we think that all partitions evolve
 according to the same model (but with different parameter values).
 
 \begin{framed}
-Make sure that \lstinline!EBOV_reference_set_15_ig! is selected.
+Make sure that `EBOV_reference_set_15_ig` is selected.
 
 \begin{itemize}
 
@@ -346,7 +346,7 @@ step.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/substitution.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/substitution.png}
     \caption{Site model setup.}
     \label{fig:subst}
 \end{figure}
@@ -364,12 +364,12 @@ Select the remaining two partitions (use **shift+click}). The
 window will now look like Figure \ref{fig:clone}.
 
 Click **OK} to to clone the site model for the other three
-partitions from \lstinline!EBOV_reference_set_15_ig!.
+partitions from `EBOV_reference_set_15_ig`.
 \end{framed}
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/clone.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/clone.png}
     \caption{Shortcut to clone site models between partitions.}
     \label{fig:clone}
 \end{figure}
@@ -489,7 +489,7 @@ mean. Getting this understanding is difficult and comes with experience.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/priors.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/priors.png}
     \caption{Prior setup.}
     \label{fig:priors}
 \end{figure}
@@ -538,8 +538,8 @@ Expand the **tracelog} options.
 \item
   Leave the **Log Every} parameter at **1000}.
 \item
-  %Change the **File Name} to \lstinline!EBOV_SC.log!
-  Leave the **File Name} as \lstinline!$(filebase).log! (this means
+  %Change the **File Name} to `EBOV_SC.log`
+  Leave the **File Name} as `$(filebase).log` (this means
   that the log file will have the same name as the XML file). 
 \end{itemize}
 \end{framed}
@@ -568,7 +568,7 @@ Finally, we can also change the tree logging frequency by expanding
 tree will already be quite large, thus if you log many trees the tree
 files can easily become extremely large. You would be amazed at how
 quickly BEAST can fill up even the biggest of drives if the tree logging
-frequency is too high! For this reason it is often a good idea to set
+frequency is too high` For this reason it is often a good idea to set
 the tree logging frequency lower than the trace log (especially for
 analyses with many taxa). However, be careful, as the post-processing
 steps of some models (such as the Bayesian skyline plot) require the
@@ -580,7 +580,7 @@ Expand the **treelog.t:tree} options.
 \begin{itemize}
 
 \item
-  Set the **File Name} to \lstinline!$(filebase).trees!.
+  Set the **File Name} to `$(filebase).trees`.
 \item
   Leave the **Log Every} parameter at the default value of 1'000.
 \end{itemize}
@@ -593,7 +593,7 @@ We are now ready to create the BEAST2 XML file. This is the final
 configuration file BEAST2 can use to execute the analysis.
 
 \begin{framed}
-Save the XML file under the name \lstinline!EBOV_SC.xml! using
+Save the XML file under the name `EBOV_SC.xml` using
 **File \textgreater{} Save}.
 \end{framed}
 
@@ -621,7 +621,7 @@ Run the **BEAST2} program.
 \begin{itemize}
 
 \item
-  Select \lstinline!EBOV_SC.xml! as the **Beast XML File}.
+  Select `EBOV_SC.xml` as the **Beast XML File}.
 \item
   Set the **Random number seed} to **777} (or pick your
   favourite number).
@@ -634,7 +634,7 @@ Run the **BEAST2} program.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.800000\textwidth]{figures/beast.png}
+    \includegraphics[width=0.800000\textwidth]{source/figures/beast.png}
     \caption{BEAST2 setup for the analysis.}
     \label{fig:beast}
 \end{figure}
@@ -642,7 +642,7 @@ Run the **BEAST2} program.
 The BEAST2 window should look as shown in Figure \ref{fig:beast}.
 
 \begin{framed}
-Run **BEAST2} by clicking the \lstinline!Run! button.
+Run **BEAST2} by clicking the `Run` button.
 \end{framed}
 
 BEAST2 will run until the specified number of steps in the chain is
@@ -653,7 +653,7 @@ look approximately as shown in Figure \ref{fig:beast_out}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.800000\textwidth]{figures/beast_out.png}
+    \includegraphics[width=0.800000\textwidth]{source/figures/beast_out.png}
     \caption{BEAST2 screen output for the analysis.}
     \label{fig:beast_out}
 \end{figure}
@@ -687,24 +687,24 @@ Can you find the likelihood, priors and hyperpriors in the XML file?
 
 Once BEAST2 has finished running, open Tracer to get an overview of the
 BEAST2 output. When the main window has opened, choose
-\lstinline!File > Import Trace File...! and select the file called
-\lstinline!EBOV_SC.log! that BEAST2 has created, or simply drag
+`File > Import Trace File...` and select the file called
+`EBOV_SC.log` that BEAST2 has created, or simply drag
 the file from the file manager window into Tracer.
 
 \begin{framed}
-Open **Tracer}. Drag and drop the \lstinline!EBOV_SC.log!
+Open **Tracer}. Drag and drop the `EBOV_SC.log`
 file into the open Tracer window.
 
 Alternatively, use **File \textgreater{} Import Trace
 File\ldots{}} (or press the **+} button below the **Trace
-Files} panel) then locate and click on \lstinline!EBOV_SC.log!.
+Files} panel) then locate and click on `EBOV_SC.log`.
 \end{framed}
 
 The Tracer window should look as shown in Figure \ref{fig:tracer_good}.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/tracer_good.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/tracer_good.png}
     \caption{Tracer showing a summary of the BEAST2 run of the strict clock analysis with an MCMC chain length of 10'000'000 and no constraints.}
     \label{fig:tracer_good}
 \end{figure}
@@ -781,10 +781,10 @@ what is shown in Figure \ref{fig:tracer_comparison}.
 
 \begin{figure}
     \centering
-    %\includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/Tracer_comparison_KDE.png}
-    \includegraphics[max width=0.5\textwidth]{figures/Tracer_KDE.png}
-    \includegraphics[max width=0.5\textwidth]{figures/Tracer_violin.png}
-    \includegraphics[max width=0.5\textwidth]{figures/Tracer_box.png}
+    %\includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/Tracer_comparison_KDE.png}
+    \includegraphics[max width=0.5\textwidth]{source/figures/Tracer_KDE.png}
+    \includegraphics[max width=0.5\textwidth]{source/figures/Tracer_violin.png}
+    \includegraphics[max width=0.5\textwidth]{source/figures/Tracer_box.png}
     \caption{Tracer showing the four marginal probability distributions of the mutation rates in each partition of the alignment. The figure at the top shows the marginal distributions plotted with a Kernel Density Estimation (KDE) in the middle as violin plots and at the bottom as box and whisker plots. Note that you 
     can also display a legend.}
     \label{fig:tracer_comparison}
@@ -822,7 +822,7 @@ Before we can create CCD trees we have to first install the **CCD} package.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.800000\textwidth]{figures/CCD_package.png}
+    \includegraphics[width=0.800000\textwidth]{source/figures/CCD_package.png}
     \caption{Installing the CCD package.}
     \label{fig:ccdpackage}
 \end{figure}
@@ -871,9 +871,9 @@ file.
 
 \begin{framed}
 Click **Choose File} next to **Input Tree File} and choose
-\lstinline!EBOV_SC.trees!.
+`EBOV_SC.trees`.
 
-Set the **Output File} to \lstinline!EBOV_SC.CCD0.tree!.
+Set the **Output File} to `EBOV_SC.CCD0.tree`.
 \end{framed}
 
 The setup should look as shown in Figure \ref{fig:treeannot}. You can
@@ -881,7 +881,7 @@ now run the program.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.800000\textwidth]{figures/treeannot.png}
+    \includegraphics[width=0.800000\textwidth]{source/figures/treeannot.png}
     \caption{TreeAnnotator setup}
     \label{fig:treeannot}
 \end{figure}
@@ -894,7 +894,7 @@ software, such as FigTree.
 
 \begin{framed}
 Open **FigTree}. Use **File \textgreater{} Open} then locate
-and click on \lstinline!EBOV_SC.CCD0.tree!.
+and click on `EBOV_SC.CCD0.tree`.
 
 \begin{itemize}
 
@@ -906,10 +906,10 @@ and click on \lstinline!EBOV_SC.CCD0.tree!.
   Size} until it is readable.
 \item
   Check the **Node Bars} checkbox, expand the options and select
-  \lstinline!height_95%_HPD! from the **Display} drop-down menu.
+  `height_95%_HPD` from the **Display} drop-down menu.
 \item
   Check the **Node Labels} checkbox, expand the options and select
-  \lstinline!posterior! from the **Display} drop-down menu.
+  `posterior` from the **Display} drop-down menu.
 \item
   Increase the **Font Size} until it is readable.
 \item
@@ -925,7 +925,7 @@ and click on \lstinline!EBOV_SC.CCD0.tree!.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=0.8\textwidth, max height=0.9\textheight]{figures/figtree_SC_CCD0.png}
+    \includegraphics[max width=0.8\textwidth, max height=0.9\textheight]{source/figures/figtree_SC_CCD0.png}
     \caption{FigTree visualisation of the estimated tree.}
     \label{fig:figtree}
 \end{figure}
@@ -976,13 +976,13 @@ from the phylogenetic tree.
 \begin{itemize}
 
 \item
-  Set the **Taxon set label} to \lstinline!ingroup!.
+  Set the **Taxon set label} to `ingroup`.
 \item
   Select all sequences on the left hand side list and click
   the **\textgreater{}\textgreater{}} button to add them to the
-  \lstinline!ingroup! taxon set.
+  `ingroup` taxon set.
 \item
-  Locate \lstinline!Bonduni! and \lstinline!Yambuku-Mayinga! sequences on 
+  Locate `Bonduni` and `Yambuku-Mayinga` sequences on 
   the right hand side and click **\textless{}\textless{}} to move them 
   out of the taxon set.
 \end{itemize}
@@ -997,7 +997,7 @@ prior list.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.60000\textwidth]{figures/taxa.png}
+    \includegraphics[width=0.60000\textwidth]{source/figures/taxa.png}
     \caption{Ingroup taxon set.}
     \label{fig:taxa}
 \end{figure}
@@ -1016,7 +1016,7 @@ node of our taxon set. However, we can only do this if we have some
 prior information about its age, which we do not have here so any such prior would 
 be pure guesswork.
 
-Leave the MCMC settings as before, save the XML file as \lstinline!EBOV_SC_constrained.xml! and run it
+Leave the MCMC settings as before, save the XML file as `EBOV_SC_constrained.xml` and run it
 in BEAST2 (with seed 777).
 
 
@@ -1044,9 +1044,9 @@ model (except for the clock model) or else simply go back to BEAUti and edit the
 analysis file. 
 
 \begin{framed}
-%TClick on the **Clock Models} tab and select \lstinline!Relaxed Clock Log Normal!
+%TClick on the **Clock Models} tab and select `Relaxed Clock Log Normal`
 %from the dropdown box.
-Click on the **Clock Models} tab and select \lstinline!Optimised Relaxed Clock!
+Click on the **Clock Models} tab and select `Optimised Relaxed Clock`
 from the dropdown box.
 \end{framed}
 
@@ -1071,7 +1071,7 @@ the tree branches are drawn.
   **ORCRates.c:clock} as the default.
 \end{framed}
 
-Leave the MCMC settings as before, save the XML file as \lstinline!EBOV_UCLD_constrained.xml! and run it
+Leave the MCMC settings as before, save the XML file as `EBOV_UCLD_constrained.xml` and run it
 in BEAST2 (with seed 777).
 
 
@@ -1118,7 +1118,7 @@ look like any of these parameters  have ``sticky'' chains!
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/tracer_terrible.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/tracer_terrible.png}
     \caption{Trace with a poor ESS value.}
     \label{fig:tracer_terrible}
 \end{figure}
@@ -1134,14 +1134,14 @@ the ingroup, with the relaxed clock analysis estimating a more recent date, but 
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/tracer_ages.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/tracer_ages.png}
     \caption{The posterior height estimates of the three trees.}
     \label{fig:tracer_ages}
 \end{figure}
   
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/tracer_tmrca.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/tracer_tmrca.png}
     \caption{The posterior tMRCAs of the ingroup.}
     \label{fig:tracer_tmrca}
 \end{figure}
@@ -1160,7 +1160,7 @@ can lead to poor convergence of the MCMC chain.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/tracer_joint.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/tracer_joint.png}
     \caption{Correlation between the tree height and clock rate estimates.}
     \label{fig:tracer_joint}
 \end{figure}
@@ -1187,7 +1187,7 @@ parameters?
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/tracer_covariance.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/tracer_covariance.png}
     \caption{Correlations between the mutation rate parameters.}
     \label{fig:tracer_covariance}
 \end{figure}
@@ -1203,7 +1203,7 @@ elevated substitution rates under the relaxed clock analysis.
   Open **TreeAnnotator}.
 
   Use the same settings as before to create the CCD0 MAP tree for the relaxed clock analysis and 
-  save it as \lstinline!EBOV_UCLD_constrained.CCD0.tree!.
+  save it as `EBOV_UCLD_constrained.CCD0.tree`.
 
   Now open the CCD tree in Figtree.
 
@@ -1214,7 +1214,7 @@ elevated substitution rates under the relaxed clock analysis.
     **decreasing} from the drop-down menu.
   \item
     Expand the **Appearance} options and increase the **Line Weight} to 
-    **4}. Now open the **Colour by} drop-down menu and select \lstinline!rate_median!
+    **4}. Now open the **Colour by} drop-down menu and select `rate_median`
     Finally, click the **Colours} button and reverse the Hue spectrum (so faster rates are
     hotter and slower rates cooler colours). 
   \item
@@ -1222,7 +1222,7 @@ elevated substitution rates under the relaxed clock analysis.
     Size} until it is readable.
   \item
     Check the **Branch Labels} checkbox, expand the options and select
-    \lstinline!rate_median! from the **Display} drop-down menu.
+    `rate_median` from the **Display} drop-down menu.
   \item
     Increase the **Font Size} until it is readable.
   \item
@@ -1235,14 +1235,14 @@ elevated substitution rates under the relaxed clock analysis.
     (approximately the most recent collection date). 
   \item
     Check the **Legend} checkbox, expand the options and select 
-    \lstinline!rate_median! from the **Attribute} drop-down menu
+    `rate_median` from the **Attribute} drop-down menu
   \end{itemize}
 \end{framed}
 
 
 \begin{figure}
     \centering
-    \includegraphics[max width=0.8\textwidth, max height=0.9\textheight]{figures/figtree_UCLD_CCD0.png}
+    \includegraphics[max width=0.8\textwidth, max height=0.9\textheight]{source/figures/figtree_UCLD_CCD0.png}
     \caption{FigTree visualisation of the tree estimated under the relaxed clock model.}
     \label{fig:figtree_ucld}
 \end{figure}
@@ -1263,7 +1263,7 @@ three partitions. In addition, we will also estimate the nucleotide frequencies.
 \begin{framed}
   Select the **Site Model} tab.
 
-  Make sure that \lstinline!EBOV_reference_set_15_ig! is selected.
+  Make sure that `EBOV_reference_set_15_ig` is selected.
 
   \begin{itemize}
     - Set the **Gamma Category Count} to 4.
@@ -1283,13 +1283,13 @@ three partitions. In addition, we will also estimate the nucleotide frequencies.
 
 \begin{figure}
     \centering
-    \includegraphics[max width=\textwidth, max height=0.9\textheight]{figures/gamma.png}
+    \includegraphics[max width=\textwidth, max height=0.9\textheight]{source/figures/gamma.png}
     \caption{The site model setup with a Gamma site model.}
     \label{fig:gamma}
 \end{figure}
 
 The site model setup should look as in Figure~\ref{fig:gamma}. No changes need to be made to the priors (we will use the default priors for the shape and frequency parameters). 
-Change the log and tree file names, save the file as \lstinline!EBOV_UCLD_constrained_gamma.xml! and run the analysis
+Change the log and tree file names, save the file as `EBOV_UCLD_constrained_gamma.xml` and run the analysis
 in BEAST2 (with seed 777). 
 
 Note that this analysis is taking a lot longer to run than the previous analyses. That is because with a Gamma category
@@ -1298,7 +1298,7 @@ usually use a lot of rate categories to discretize the Gamma distribution. In pr
 amount of rate variation while also not increasing the overhead too much. 
 
 There is already a pre-cooked log file of this analysis that was run a lot longer
-in the \lstinline!precooked_runs/! folder. Load this file into Tracer and compare it
+in the `precooked_runs/` folder. Load this file into Tracer and compare it
 to the earlier relaxed clock analysis without the Gamma model. 
 
 
