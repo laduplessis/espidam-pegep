@@ -91,3 +91,6 @@ subsampling all non-Alpha genomes from the UK that were sequenced between
 We sampled 6 genomes at random from all genomes sequenced in every epiweek during this 
 period. For epiweeks where fewer than 6 genomes are available we used all 
 available genomes. This resulted in 160 genomes. 
+
+## MERS dataset
+Dataset of 100 camel and 174 human MERS-CoV genomes sampled between 2012 and 2016, from Dudas et al ([eLife 2018](https://elifesciences.org/articles/31257)).
