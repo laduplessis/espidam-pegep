@@ -1,0 +1,234 @@
+---
+title: "Phylogenetics in R"
+subtitle: "Pol dataset"
+author: "Louis du Plessis"
+date: '`r format(Sys.time(), "Last modified: %d %b %Y")`'
+output: html_document
+params:
+  polfile: "../../datasets/hiv/hiv_pol.fasta"
+  
+---
+
+```{r setup, include=FALSE}
+
+library(ape)
+library(phangorn)
+
+knitr::opts_chunk$set(echo = TRUE, fig.path="figs/", dev='png')
+
+
+```
+
+
+# Pol dataset
+
+First we read in the alignment. 
+
+```{r load-data}
+
+pol <- read.dna(params$polfile, format = "fasta")
+
+```
+
+We can check to see that pol contains 42 sequences of length 689.
+We can also display the names of the sequences contained in each.
+
+We also extract the names of the sequences that stem from the patient, the victim, and the community.
+
+```{r, eval=TRUE}
+pol
+
+
+labels(pol)
+
+allpatients_pol <- sapply(strsplit(labels(pol), "\\|"), function(x) x[2])
+patient_pol     <- labels(pol)[grep("^P", allpatients_pol)]
+victim_pol      <- labels(pol)[grep("^V", allpatients_pol)]
+community_pol   <- labels(pol)[grep("^LA", allpatients_pol)]
+
+```
+
+## Distance-based trees
+
+Calculate a neighbour-joining tree using a TN93 substitution model. 
+
+```{r pol-distancetrees}
+
+D_pol_TN93 <- ape::dist.dna(pol, model="TN93", as.matrix=TRUE)
+tree_pol_NJ_TN93 <- phangorn::NJ(D_pol_TN93)
+
+```
+
+Check if the tree is rooted and if not, plot the unrooted tree.
+
+```{r pol-nj-unrooted}
+
+if (!is.rooted(tree_pol_NJ_TN93)) {
+    ape::plot.phylo(tree_pol_NJ_TN93, type = "unrooted", cex=0.5, lab4ut = "axial")
+}
+
+```
+
+We assume the outgroup is `AY156771.1|LA02.RT` (one of the community sequences) and root the neighbour-joining tree on it, before plotting the rooted tree.
+
+```{r root-nj}
+
+  tree_pol_NJ_TN93_rooted <- root.phylo(tree_pol_NJ_TN93,  
+                                        outgroup = "AY156771.1|LA02.RT ", 
+                                        resolve.root = TRUE)
+  plot.phylo(tree_pol_NJ_TN93_rooted, align.tip.label = TRUE, cex=0.5)
+  
+```
+
+Now create a colour array to colour patient, victim and community sequences differently using the `tip.color` argument in `plot.phylo()`.
+
+```{r plot-nj} 
+
+    colours <- rep("black", length(allpatients_pol))
+    colours[match(patient_pol, tree_pol_NJ_TN93_rooted$tip.label)] <- 'blue'
+    colours[match(victim_pol, tree_pol_NJ_TN93_rooted$tip.label)] <- 'red'
+    
+    plot.phylo(tree_pol_NJ_TN93_rooted, align.tip.label = TRUE, cex=0.5, 
+               tip.color = colours)
+    tiplabels(NA, pch=16, col=colours)
+    legend("bottomleft", legend=c("Patient", "Victim", "Environment"),
+           col=c("blue", "red", "black"), pch=16, cex=0.8)
+
+```
+
+Build the neighbour-joining tree using a Jukes-Cantor model, plot the tree and 
+then plot the tanglegram connecting the Jukes Cantor NJ tree to the TN93 NJ tree.
+
+```{r tanglegram-nj}
+
+# Construct and root Neighbour-joining tree
+D_pol_JC <- ape::dist.dna(pol, model="JC", as.matrix=TRUE)
+tree_pol_NJ_JC <- phangorn::NJ(D_pol_JC)
+tree_pol_NJ_JC_rooted <- root.phylo(tree_pol_NJ_JC,  
+                                    outgroup = "AY156771.1|LA02.RT ", 
+                                    resolve.root = TRUE)
+
+# Plot the tree
+plot.phylo(tree_pol_NJ_JC_rooted, align.tip.label = TRUE, cex=0.5, 
+           tip.color = colours)
+legend("bottomleft", legend=c("Patient", "Victim", "Environment"),
+           col=c("blue", "red", "black"), pch=16, cex=0.8)
+
+
+# Plot the tanglegram
+cophyloplot(tree_pol_NJ_JC_rooted, tree_pol_NJ_TN93_rooted, assoc=cbind(tree_pol_NJ_JC_rooted$tip.label, tree_pol_NJ_TN93_rooted$tip.label), show.tip.label = FALSE, space=100, gap =5, length.line=0.2)
+
+
+```
+
+
+
+## Parsimony
+
+Calculate the parsimony score of the NJ tree. To use the function we have to first
+convert the alignment to an object of type `phyDat`, which is used by the `phangorn` 
+package. 
+
+```{r parsimony-score}
+
+  pol_phyDat <- as.phyDat(pol)  
+  parsimony(tree_pol_NJ_JC, pol_phyDat)
+```
+
+Now use the `pratchet()` function to find the maximum parsimony tree and then use 
+`acctran()` to adjust the branch lengths, and again plot the tree.
+
+```{r maximum-parsimony}
+
+  # Calculate the maximum parsimony tree
+  tree_pol_MP <- pratchet(pol_phyDat)
+  tree_pol_MP <- acctran(tree_pol_MP, data = pol_phyDat)
+  
+  # Plot it
+  colours <- rep("black", length(tree_pol_MP$tip.label))
+  colours[match(patient_pol, tree_pol_MP$tip.label)] <- 'blue'
+  colours[match(victim_pol, tree_pol_MP$tip.label)] <- 'red'
+    
+  plot.phylo(tree_pol_MP, align.tip.label = TRUE, cex=0.7, 
+               tip.color = colours)
+  tiplabels(NA, pch=16, col=colours)
+  legend("bottomleft", legend=c("Patient", "Victim", "Environment"),
+       col=c("blue", "red", "black"), pch=16, cex=0.8)
+```
+
+We can also verify that the maximum parsimony tree has a lower parsimony score 
+than the NJ tree. 
+
+```{r parsimony-scores}
+
+  parsimony(tree_pol_NJ_TN93, pol_phyDat)
+  parsimony(tree_pol_MP, pol_phyDat)
+  parsimony(tree_pol_NJ_TN93, pol_phyDat) < parsimony(tree_pol_MP, pol_phyDat)
+
+```
+
+Now we plot the tanglegram comparing the neighbour-joining tree to the maximum
+parsimony tree.
+
+```{r tanglegram-mp}
+
+  # Root on the same sequence
+  tree_pol_MP_rooted <- root.phylo(tree_pol_MP,  
+                                   outgroup = "AY156771.1|LA02.RT ", 
+                                   resolve.root = TRUE)
+  
+  # Plot the tanglegram
+  cophyloplot(tree_pol_MP_rooted, tree_pol_NJ_TN93_rooted,
+              assoc=cbind(tree_pol_MP_rooted$tip.label, 
+                          tree_pol_NJ_TN93_rooted$tip.label), 
+              show.tip.label = FALSE, space=100, gap =5, length.line=0.1)
+
+```
+
+
+## Maximum-likelihood
+
+Calculate the maximum-likelihood tree using the GTR model. Since the tree is 
+unrooted (check it!) also root it on the same outgroup. 
+
+```{r ml-tree, eval=TRUE}
+
+  tree_pol_ML_GTR <- pml_bb(pol, model="GTR")
+  tree_pol_ML_GTR_rooted <- root.phylo(tree_pol_ML_GTR$tree,  
+                                       outgroup = "AY156771.1|LA02.RT ", 
+                                       resolve.root = TRUE)
+
+```
+
+Now plot the ML tree.
+
+```{r plot-mltree}  
+
+  colours <- rep("black", length(tree_pol_ML_GTR_rooted$tip.label))
+  colours[match(patient_pol, tree_pol_ML_GTR_rooted$tip.label)] <- 'blue'
+  colours[match(victim_pol, tree_pol_ML_GTR_rooted$tip.label)] <- 'red'
+    
+  plot.phylo(tree_pol_ML_GTR_rooted, align.tip.label = TRUE, cex=0.7, 
+               tip.color = colours)
+  tiplabels(NA, pch=16, col=colours)
+  legend("bottomleft", legend=c("Patient", "Victim", "Environment"),
+       col=c("blue", "red", "black"), pch=16, cex=0.8)
+
+```
+
+
+Tanglegram between the NJ and ML trees
+
+```{r tanglegram-ml}
+
+  # Plot the tanglegram
+  cophyloplot(tree_pol_ML_GTR_rooted, tree_pol_NJ_TN93_rooted,
+              assoc=cbind(tree_pol_ML_GTR_rooted$tip.label, 
+                          tree_pol_NJ_TN93_rooted$tip.label), 
+              show.tip.label = FALSE, space=100, gap =5, length.line=0.1)
+
+```
+
+
+
+
