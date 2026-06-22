@@ -1,5 +1,14 @@
 .DS_Store
 
+# Latex files
+*.aux
+*.bbl
+*.blg
+*.run.xml
+*.toc
+*blx.bib
+*.out
+
 # History files
 .Rhistory
 .Rapp.history
