@@ -126,6 +126,3 @@ Now repeat all of the above with the env alignment. The alignment is bigger, so 
 
 ## Prettier trees
 The tree plotting functions in `ape` are quite bare-bones and it requires a lot of effort to make them output pretty trees. `ggtree` uses the same grammar for graphics as `ggplot2` to plot pretty trees, but the learning curve is quite steep if you're not used to `ggplot2`. Fortunately it's quite widely used, and it's easy to get help online. You can also look at the `ggplot` book by Guangchang Yu: https://yulab-smu.top/treedata-book/index.html, especially chapters 4 and 5 (it's quite short). 
-
-## IQ-TREE
-IQ-TREE is one of the most widely used programs for building maximum-likelihood trees. It also automatically uses ModelFinder to find the best-fitting nucleotide substitution model. Does it lead to the same conclusions? You can build the maximum-likelihood tree using default settings by simply typing in `iqtree3 -s pol.fasta` (if IQ-TREE version 3 is installed). 
